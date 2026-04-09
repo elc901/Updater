@@ -1,6 +1,3 @@
 import webbrowser
-import ufu
-ufu.register()
-if succes == True:
-    webbrowser.open("your-link") #1
-    
+with open("updater_status.txt", "r") as f:
+    error = f.read().strip() == "True"
