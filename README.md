@@ -1,2 +1,2 @@
-# its expirement branch of "updater".
+# it is expirement branch of "updater".
 Here im public unstable code
