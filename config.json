@@ -1,9 +1,0 @@
-{
-    "repo-name": "your-repo-name ( optional )",
-    "repo-link": "your link",
-    "user-link": "your-link ( optional )",
-    "user-name": "your-name ( optional )",
-    "version": "version-your-programm (optional)",
-    "link-for-list": "your-link ( optional )",
-    "excludes": "your-excludes ( folders/files )  ( optional )" 
-}
