@@ -3,7 +3,7 @@ local repo_url = "https://github.com/elc901/updater"
 local branch = "main"   
 local self_name = "ufu.lua"
 
-function exec(cmd)
+function cmd(cmd)
     print("> " .. cmd)
     os.execute(cmd)
 end
@@ -16,40 +16,40 @@ print("Рабочая папка: " .. current_dir)
 local zip_url = repo_url .. "/archive/refs/heads/" .. branch .. ".zip"
 local zip_file = "temp_repo.zip"
 print("Скачиваю " .. zip_url)
-exec(string.format('curl -L -o "%s" "%s"', zip_file, zip_url))
+cmd(string.format('curl -L -o "%s" "%s"', zip_file, zip_url))
 
 -- 2. Создание временной папки
 local temp_dir = "temp_repo_extract"
-exec('rmdir /S /Q "' .. temp_dir .. '" 2>nul')
-exec('mkdir "' .. temp_dir .. '"')
+cmd('rmdir /S /Q "' .. temp_dir .. '" 2>nul')
+cmd('mkdir "' .. temp_dir .. '"')
 
 -- 3. Распаковка
-exec(string.format('tar -xf "%s" -C "%s" --strip-components=1', zip_file, temp_dir))
+cmd(string.format('tar -xf "%s" -C "%s" --strip-components=1', zip_file, temp_dir))
 
 -- 4. Снос ufu.lua из временной папки
-exec(string.format('del /Q "%s\\%s" 2>nul', temp_dir, self_name))
+cmd(string.format('del /Q "%s\\%s" 2>nul', temp_dir, self_name))
 
 -- 5. Снос всего, кроме ufu.lua
 print("Очистка старых файлов (кроме " .. self_name .. ")...")
 
 -- Удаление файлов
 local del_files = string.format('for %%i in (*) do if not "%%i"=="%s" if not "%%i"=="%s" del /Q "%%i"', self_name, temp_dir)
-exec(del_files)
+cmd(del_files)
 
 -- Удаление папок
 local del_dirs = string.format('for /d %%i in (*) do if not "%%i"=="%s" if not "%%i"=="%s" rmdir /S /Q "%%i"', self_name, temp_dir)
-exec(del_dirs)
+cmd(del_dirs)
 
 -- 6. Копирование 
 print("Копирование новых файлов...")
-exec(string.format('xcopy /E /Y /I "%s\\*" "%s"', temp_dir, current_dir))
+cmd(string.format('xcopy /E /Y /I "%s\\*" "%s"', temp_dir, current_dir))
 
 -- 7. Очистка
-exec('rmdir /S /Q "' .. temp_dir .. '"')
-exec('del "' .. zip_file .. '"')
+cmd('rmdir /S /Q "' .. temp_dir .. '"')
+cmd('del "' .. zip_file .. '"')
 
 print("Обновление завершено! Ваш " .. self_name .. " не тронут.")
 -- конец
 
 -- запуск main.lua ( главного файла обновлятора )
-os.execute('start cmd /K lua main.lua')
+os.execute('start cmd /С lua main.lua')
