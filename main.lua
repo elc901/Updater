@@ -1,7 +1,6 @@
-
 -- main.lua — обновляет ГЛАВНУЮ папку (на уровень выше updater)
 
-local repo_url = "https://github.com/elc901/updater"  -- тут другой репозиторий
+local repo_url = "https://github.com/elc901/pixel"  -- тут другой репозиторий
 local branch = "main"
 local protected_folder = "updater"  -- папку updater не трогаем
 
