@@ -2,6 +2,7 @@
 local repo_url = "https://github.com/elc901/updater" -- не трогать
 local branch = "main"   
 local self_name = "ufu.lua"
+local protected_file = "config.json"  
 
 function cmd(cmd)
     print("> " .. cmd)
@@ -26,29 +27,30 @@ cmd('mkdir "' .. temp_dir .. '"')
 -- 3. Распаковка
 cmd(string.format('tar -xf "%s" -C "%s" --strip-components=1', zip_file, temp_dir))
 
--- 4. Снос ufu.lua из временной папки
+-- 4. Удаление из временной папки защищённые файлы 
 cmd(string.format('del /Q "%s\\%s" 2>nul', temp_dir, self_name))
+cmd(string.format('del /Q "%s\\%s" 2>nul', temp_dir, protected_file))
 
--- 5. Снос всего, кроме ufu.lua
-print("Очистка старых файлов (кроме " .. self_name .. ")...")
+-- 5. Очищение текущей папки
+print("Очистка старых файлов (кроме " .. self_name .. ", " .. protected_file .. ")...")
 
 -- Удаление файлов
-local del_files = string.format('for %%i in (*) do if not "%%i"=="%s" if not "%%i"=="%s" del /Q "%%i"', self_name, temp_dir)
+local del_files = string.format(
+    'for %%i in (*) do if not "%%i"=="%s" if not "%%i"=="%s" if not "%%i"=="%s" del /Q "%%i"',
+    self_name, protected_file, temp_dir
+)
 cmd(del_files)
 
--- Удаление папок
-local del_dirs = string.format('for /d %%i in (*) do if not "%%i"=="%s" if not "%%i"=="%s" rmdir /S /Q "%%i"', self_name, temp_dir)
+-- Удаление папок 
+local del_dirs = string.format('for /d %%i in (*) do if not "%%i"=="%s" rmdir /S /Q "%%i"', temp_dir)
 cmd(del_dirs)
 
--- 6. Копирование 
+-- 6. Копирование новых файлов 
 print("Копирование новых файлов...")
 cmd(string.format('xcopy /E /Y /I "%s\\*" "%s"', temp_dir, current_dir))
 
--- 7. Очистка
+-- 7. Очистка временных файлов
 cmd('rmdir /S /Q "' .. temp_dir .. '"')
 cmd('del "' .. zip_file .. '"')
 
-print("Обновление завершено! Ваш " .. self_name .. " не тронут.")
--- конец
-
--- запуск main.lua ( главного файла обновлятора )
+print("Обновление завершено. Защищённые файлы сохранены: " .. self_name .. ", " .. protected_file)

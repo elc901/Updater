@@ -1,9 +1,14 @@
 {
-    "repo-link": "your-link ",
-    "repo-name": "your-name ( optional )",
-    "owner": "link ( optional )",
-    "contributors": "links ( optional )",
-    "branch": "branch",
+    "repo": {
+        "branch": "your-branch",
+        "repo-link": "your-link",
+        "repo-name": "your-name ( optional )"
+    },
+    "developers": {
+        "owner": "links ( optional )",
+        "contributors": "links ( optional ); "
+    },
+    
     "dev-log": "link ( optional )"
 }
 
