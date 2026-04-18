@@ -10,6 +10,7 @@
     },
     
     "dev-log": "link ( optional )",
-    "start-file": "file name"
+    "start-file": "file name",
+    "dev-link": "your-link"
 }
 

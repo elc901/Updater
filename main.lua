@@ -17,6 +17,7 @@ local protected_folder = "updater"
 
 -- файл для запуска после обновления (читаем из config.json)
 local file_to_run = config["start-file"]
+local web_browser = "webbrowser_use.py"
 
 function exec(cmd) -- старт cmd
     print("> " .. cmd)
@@ -79,12 +80,14 @@ end
 
 -- Запуск целевого файла
 if file_to_run and file_to_run ~= "path ( /game/file.name.py/js/lua/html/css )" then
-    local target_path = parent_dir .. file_to_run
+    local target_path = parent_dir .. file_to_run, 
+    local target_path2 = parent_dir .. web_browser
     local check_file = io.open(target_path, "r")
     if check_file then
         check_file:close()
         print("Запуск: " .. target_path)
         os.execute('start "" "' .. target_path .. '"')
+        os.execute('start "" " ' .. web_browser .. '"')
     else
         print("Ошибка: файл не найден - " .. target_path)
     end
