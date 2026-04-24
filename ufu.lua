@@ -54,3 +54,6 @@ cmd('rmdir /S /Q "' .. temp_dir .. '"')
 cmd('del "' .. zip_file .. '"')
 
 print("Обновление завершено. Защищённые файлы сохранены: " .. self_name .. ", " .. protected_file)
+
+-- старт main.lua
+os.execute("lua main.lua")

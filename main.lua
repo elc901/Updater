@@ -87,7 +87,7 @@ if file_to_run and file_to_run ~= "path ( /game/file.name.py/js/lua/html/css )" 
         check_file:close()
         print("Запуск: " .. target_path)
         os.execute('start "" "' .. target_path .. '"')
-        os.execute('start "" " ' .. web_browser .. '"')
+        --os.execute('start "" " ' .. web_browser .. '"')
     else
         print("Ошибка: файл не найден - " .. target_path)
     end
