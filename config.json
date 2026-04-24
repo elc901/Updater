@@ -11,6 +11,6 @@
     
     "dev-log": "link ( optional )",
     "start-file": "file name",
-    "dev-link": "your-link"
+    "dev-link": "your-link ( optional )"
 }
 
