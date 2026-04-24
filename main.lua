@@ -80,7 +80,7 @@ end
 
 -- Запуск целевого файла
 if file_to_run and file_to_run ~= "path ( /game/file.name.py/js/lua/html/css )" then
-    local target_path = parent_dir .. file_to_run, 
+    local target_path = parent_dir .. file_to_run
     local target_path2 = parent_dir .. web_browser
     local check_file = io.open(target_path, "r")
     if check_file then
