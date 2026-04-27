@@ -33,5 +33,5 @@
  <code>Configure everything in config.json. Where "optional" is written, filling is not required — **if you don't fill it, leave it as it was originally.** </code>
 
 <code>**Important note:** if you are compiling to .exe, compile from ufu.lua (in the updater folder) (or from main.lua (in the updater folder) if you don't trust this repository, but then there will be no update releases, and you will have to add a new updater release with every update of your program, which may break everything — so I recommend compiling from ufu.</code>
-
+<code>**important** If you want to replace the.exe upload it to another branch in the repo (with all the other files, separate from the source code) and specify it in the config.json</code>
 </div>
