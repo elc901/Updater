@@ -2,36 +2,33 @@
 <h1>updater</h1>
   
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3000&pause=500&color=5e9dab&center=true&vCenter=true&width=435&lines=Fast;+Work+On+Lua+and+Python;+Open+Source)](https://git.io/typing-svg)
-
+> [!CAUTION]
+> **ФЕЙКИ**
+>
+> Я не веду никаких других аккаунтов.
+> Если вы наткнулись на похожий ник — это не я.
 </div>
 
 <div align="center">
+<h1>Описание</h1>
 
-<h1>Description</h1>
+**Роль: обновлять ваши файлы из репозитория на GitHub.**
 
-**Role: add to your program the ability to update locally on your PC via a GitHub repository using cmd.**
-
-**▫️Programming Languages▫️**
+**▫️Языки программирование▫️**
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Lua](https://img.shields.io/badge/Lua-2C2D72?style=for-the-badge&logo=lua&logoColor=white)
 
-**Libraries: dkjson**
+**Библиотеки: dkjson**
 </div>
 <div align="center">
   
-<h1>Instructions</h1>
+<h1>Инструкции</h1>
 
- <code>Download the latest version from [releases](https://github.com/elc901/updater/releases)</code>
- 
- <code>Place the updater folder in the root</code>
-
- <code>**IMPORTANT!** The main program file must be located next to the updater folder (in the root of your program).</code>
- 
- <code>In start-file (config.json) write the file name (example: main.py).</code>
-
- <code>Configure everything in config.json. Where "optional" is written, filling is not required — **if you don't fill it, leave it as it was originally.** </code>
-
-<code>**Important note:** if you are compiling to .exe, compile from ufu.lua (in the updater folder) (or from main.lua (in the updater folder) if you don't trust this repository, but then there will be no update releases, and you will have to add a new updater release with every update of your program, which may break everything — so I recommend compiling from ufu.</code>
-<code>**important** If you want to replace the.exe upload it to another branch in the repo (with all the other files, separate from the source code) and specify it in the config.json</code>
+Скачайте самую последнюю версию релиза [релизов](https://github.com/elc901/updater/releases).
+Переместите папку updater в корень игры.
+В поле "start-file" напишите название файла ( с расширением ) который должен стартовать.
+Можете менять настройки в config.json, там где написано "optional" что то писать не обязательно, **но если вы ничего не меняете - оставьте как есть**
+**Важный момент**, если вы хотите скомпилировать в .exe то компилируйте из под ufu.lua или main.lua ( если не доверяете этому репозиторию, но вам придется с каждым обновлением updater вам придется загружать новую версию в репозиторий ) с включением папки updater ( со всем содержанием ) и корневой папки игры.
+Также создайте новую ветку с любым названием и загружайте туда файлы как должно загружать в папку. Пишите название ветки в "branch" в "config.json".
 </div>
