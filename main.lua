@@ -98,6 +98,10 @@ end
 print("Write 'y' or 'n' for download")
 local accept = io.read()
 
+local script_path = debug.getinfo(1).source:sub(2)
+local current_dir = script_path:match("(.*[\\/])") or ".\\"
+local parent_dir = current_dir .. "..\\"
+
 if accept == "y" then
     download() 
 else
