@@ -15,7 +15,7 @@ local repo_owner = config.developers.owner
 local contributors = config.developers.contributors
 local protected_folder = "updater"
 
--- файл для запуска после обновления (читаем из config.json)
+-- файл для запуска после обновления 
 local file_to_run = config["start-file"]
 local web_browser = "webbrowser_use.py"
 
