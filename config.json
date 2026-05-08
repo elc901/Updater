@@ -9,6 +9,11 @@
         "contributors": "links ( optional ); "
     },
     
+    "load": {
+        "auto-load": "True or False ( optional )",
+        "hotbar": "True or False ( optional )"
+    },
+    
     "dev-log": "link ( optional )",
     "start-file": "file name",
     "dev-link": "your-link ( optional )"
