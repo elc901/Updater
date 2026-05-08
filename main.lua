@@ -14,10 +14,11 @@ local repo_name = config.repo["repo-name"]
 local repo_owner = config.developers.owner
 local contributors = config.developers.contributors
 local protected_folder = "updater"
-
+local autoload = config.load["auto-load"]
+-- local hotbar = config.load.hotbar  -- пока нет хотбара
 -- файл для запуска после обновления 
 local file_to_run = config["start-file"]
-local web_browser = "webbrowser_use.py"
+-- local web_browser = "webbrowser_use.py"
 
 function exec(cmd) -- старт cmd
     print("> " .. cmd)
@@ -29,11 +30,11 @@ function download()
     -- где все лежит
     local script_path = debug.getinfo(1).source:sub(2)
     local current_dir = script_path:match("(.*[\\/])") or ".\\"
-    print("Текущая папка (updater): " .. current_dir)
+    print("Now folder (updater): " .. current_dir)
 
     -- Главная папка (на уровень выше)
     local parent_dir = current_dir .. "..\\"
-    print("Главная папка: " .. parent_dir)
+    print("Main folder: " .. parent_dir)
 
     -- 1. Скачивание архива
     local zip_url = repo_url .. "/archive/refs/heads/" .. branch .. ".zip"
@@ -53,19 +54,19 @@ function download()
     exec(string.format('rmdir /S /Q "%s\\%s" 2>nul', temp_dir, protected_folder))
 
     -- 5. Очистка ГЛАВНОЙ папки (parent_dir), КРОМЕ папки updater
-    print("Очистка главной папки (кроме " .. protected_folder .. ")...")
+    print("Clear main folder...")
     exec(string.format('for %%i in ("%s*") do if not "%%~nxi"=="%s" del /Q "%%i"', parent_dir, protected_folder))
     exec(string.format('for /d %%i in ("%s*") do if not "%%~nxi"=="%s" rmdir /S /Q "%%i"', parent_dir, protected_folder))
 
     -- 6. Копирование новых файлов из временной папки в ГЛАВНУЮ
-    print("Копирование новых файлов...")
+    print("Copying new files...")
     exec(string.format('xcopy /E /Y /I "%s\\*" "%s"', temp_dir, parent_dir))
 
     -- 7. Очистка временных файлов
     exec('rmdir /S /Q "' .. temp_dir .. '"')
     exec('del "' .. zip_file .. '"')
 
-    print("Обновление завершено успешно")
+    print("✅Update succes finished")
 
     -- Вывод дополнительной информации
     if repo_name and repo_name ~= "your-name ( optional )" then 
@@ -81,41 +82,43 @@ function download()
     -- Запуск целевого файла
     if file_to_run and file_to_run ~= "path ( /game/file.name.py/js/lua/html/css )" then    
         local target_path = parent_dir .. file_to_run
-        local target_path2 = parent_dir .. web_browser
+        --local target_path2 = parent_dir .. web_browser
         local check_file = io.open(target_path, "r")
         if check_file then
             check_file:close()
-            print("Запуск: " .. target_path)
+            print("start: " .. target_path)
             os.execute('start "" "' .. target_path .. '"')
             --os.execute('start "" " ' .. web_browser .. '"')
         else
-            print("Ошибка: файл не найден - " .. target_path)
+            print("error: file not defind - " .. target_path)
         end
     else
         print("В config.json не указан start-file")
     end
 end
-print("Write 'y' or 'n' for download")
-local accept = io.read()
-
-local script_path = debug.getinfo(1).source:sub(2)
-local current_dir = script_path:match("(.*[\\/])") or ".\\"
-local parent_dir = current_dir .. "..\\"
-
-if accept == "y" then
-    download() 
+if autoload == "True" then
+    download()
 else
-    if file_to_run and file_to_run ~= "path ( /game/file.name.py/js/lua/html/css )" then    
-        local target_path = parent_dir .. file_to_run
-        local check_file = io.open(target_path, "r")
-        if check_file then
-            check_file:close()
-            print("Запуск: " .. target_path)
-            os.execute('start "" "' .. target_path .. '"')
-        else
-            print("Ошибка: файл не найден - " .. target_path)
-        end
+    print("Write 'y' or 'n' for download")
+    local accept = io.read()
+    local script_path = debug.getinfo(1).source:sub(2)
+    local current_dir = script_path:match("(.*[\\/])") or ".\\"
+    local parent_dir = current_dir .. "..\\"
+    if accept == "y" then
+        download() 
     else
-        print("В config.json не указан start-file")
+        if file_to_run and file_to_run ~= "path ( /game/file.name.py/js/lua/html/css )" then    
+            local target_path = parent_dir .. file_to_run
+            local check_file = io.open(target_path, "r")
+            if check_file then
+                check_file:close()
+                print("start: " .. target_path)
+                os.execute('start "" "' .. target_path .. '"')
+            else
+                print("error: file not defind - " .. target_path)
+            end
+        else
+            print("in config.json not defind start-file")
+        end
     end
 end
