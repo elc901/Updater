@@ -48,33 +48,19 @@
 
 В папке `updater` отредактируйте `config.json`:
 
-```json
-{
-  "branch": "release",
-  "repo-link": "https://github.com/username/myapp",
-  "repo-name": "MyApp",
-  "owner": "https://github.com/username",
-  "contributors": "https://github.com/contrib1, https://github.com/contrib2",
-  "autoload": true,
-  "hotbar": true,
-  "dev-log": "https://github.com/username/myapp/releases",
-  "start-file": "MyApp.exe",
-  "dev-link": "https://t.me/devblog"
-}
-```
-
 | Поле | Обязательное | Описание |
 |---|:---:|---|
 | `branch` | ✅ | Ветка репозитория, откуда брать обновления |
 | `repo-link` | ✅ | Полная ссылка на GitHub-репозиторий |
 | `start-file` | ✅ | Файл, который запускается после обновления |
-| `repo-name` | — | Отображаемое имя программы |
-| `owner` | — | Ссылка на профиль разработчика |
-| `contributors` | — | Ссылки на соавторов (через запятую, в кавычках) |
-| `autoload` | — | `true` — устанавливать сразу, `false` — спрашивать |
-| `hotbar` | — | Показывать прогресс-бар |
-| `dev-log` | — | Ссылка на лог изменений (откроется в браузере) |
-| `dev-link` | — | Ссылка на блог или Telegram/Discord и прочие-каналы разработки |
+| `repo-name` | - | Отображаемое имя программы |
+| `owner` | - | Ссылка на профиль разработчика |
+| `contributors` | - | Ссылки на соавторов (через запятую, в кавычках) |
+| `autoload` | - | `true` — устанавливать сразу, `false` — спрашивать |
+| `hotbar` | - | Показывать прогресс-бар |
+| `dev-log` | - | Ссылка на лог изменений (откроется в браузере) |
+| `dev-link` | - | Ссылка на блог или Telegram/Discord и прочие-каналы разработки |
+| `excludes` | - | папки которые не должны быть удалены |
 
 ### Компиляция
 
