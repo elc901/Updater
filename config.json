@@ -1,9 +1,22 @@
 {
-    "repo-name": "your-repo-name ( optional )",
-    "repo-link": "your link",
-    "user-link": "your-link ( optional )",
-    "user-name": "your-name ( optional )",
-    "version": "version-your-programm (optional)",
-    "link-for-list": "your-link ( optional )",
-    "excludes": "your-excludes ( folders/files )  ( optional )" 
+    "repo": {
+        "branch": "branch",
+        "repo-link": "your-link",
+        "repo-name": "your-name ( optional )"
+    },
+    "developers": {
+        "owner": "links ( optional )",
+        "contributors": "links ( optional ); "
+    },
+    
+    "load": {
+        "auto-load": "True or False ( optional )",
+        "hotbar": "True or False ( optional )",
+        "excludes": ["name1", "name2", "name3"]
+    },
+    
+    "dev-log": "link ( optional )",
+    "start-file": "your-file",
+    "dev-link": "your-link ( optional )"
 }
+
