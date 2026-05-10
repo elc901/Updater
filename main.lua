@@ -15,6 +15,7 @@ local repo_owner = config.developers.owner
 local contributors = config.developers.contributors
 local protected_folder = "updater"
 local autoload = config.load["auto-load"]
+local excludes = config.load.excludes
 -- local hotbar = config.load.hotbar  -- пока нет хотбара
 -- файл для запуска после обновления 
 local file_to_run = config["start-file"]
@@ -50,15 +51,25 @@ function download()
     -- 3. Распаковка
     exec(string.format('tar -xf "%s" -C "%s" --strip-components=1', zip_file, temp_dir))
 
-    -- 4. Удаление папки updater из новой версии (чтобы не затереть саму себя)
+    -- 4. Удаление папки updater и excludes из новой версии
     exec(string.format('rmdir /S /Q "%s\\%s" 2>nul', temp_dir, protected_folder))
+    for _, name in ipairs(excludes) do
+        exec(string.format('rmdir /S /Q "%s\\%s" 2>nul', temp_dir, name))
+end
 
-    -- 5. Очистка ГЛАВНОЙ папки (parent_dir), КРОМЕ папки updater
+    -- 5. Очистка ГЛАВНОЙ папки, КРОМЕ updater и excludes
     print("Clear main folder...")
     exec(string.format('for %%i in ("%s*") do if not "%%~nxi"=="%s" del /Q "%%i"', parent_dir, protected_folder))
-    exec(string.format('for /d %%i in ("%s*") do if not "%%~nxi"=="%s" rmdir /S /Q "%%i"', parent_dir, protected_folder))
 
-    -- 6. Копирование новых файлов из временной папки в ГЛАВНУЮ
+    -- Удаляем папки, но пропускаем protected_folder и все excludes
+    local cmd = string.format('for /d %%i in ("%s*") do if not "%%~nxi"=="%s" ', parent_dir, protected_folder)
+    for _, name in ipairs(excludes) do
+        cmd = cmd .. string.format('if not "%%~nxi"=="%s" ', name)
+    end
+    cmd = cmd .. 'rmdir /S /Q "%%i"'
+    exec(cmd)
+
+    -- 6. Копирование новых файлов из временной папки в главную папку
     print("Copying new files...")
     exec(string.format('xcopy /E /Y /I "%s\\*" "%s"', temp_dir, parent_dir))
 

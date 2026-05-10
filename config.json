@@ -1,6 +1,6 @@
 {
     "repo": {
-        "branch": "your-branch",
+        "branch": "branch",
         "repo-link": "your-link",
         "repo-name": "your-name ( optional )"
     },
@@ -11,11 +11,12 @@
     
     "load": {
         "auto-load": "True or False ( optional )",
-        "hotbar": "True or False ( optional )"
+        "hotbar": "True or False ( optional )",
+        "excludes": ["name1", "name2", "name3"]
     },
     
     "dev-log": "link ( optional )",
-    "start-file": "file name",
+    "start-file": "your-file",
     "dev-link": "your-link ( optional )"
 }
 
